@@ -13,23 +13,12 @@ on:
         type: string
 
 jobs:
-  checkout_repository:
+  run_tests:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository code
       uses: actions/checkout@v3
-    - run: ls ${{ github.workspace }}
-
-  build_applications:
-    runs-on: ubuntu-latest
-    steps:
     - name: Build Applications
-    - run: ls ${{ github.workspace }}
     - run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
-  
-  run_tests:
-    runs-on: ubuntu-latest
-    steps:
     - name: Run tests
-    - run: ls ${{ github.workspace }}
     - run: ./gradlew test
