@@ -67,7 +67,8 @@ public class MetamaskFlow {
         inputs.get(1).sendKeys(data.getRpcUrl());
         inputs.get(2).sendKeys(data.getChainId());
         inputs.get(3).sendKeys(data.getCurrencySymbol());
-        $x("//button[@class='button btn--rounded btn-primary']").shouldBe(Condition.interactable)
+        $x("//button[@class='button btn--rounded btn-primary']")
+                .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
         log.info("Network was successfully added");
     }
