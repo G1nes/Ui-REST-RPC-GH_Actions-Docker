@@ -14,7 +14,8 @@ public class CreateCollectionForm {
     private final SelenideElement createButton;
 
     public CreateCollectionForm() {
-        SelenideElement container = $x("//b[contains(text(), 'Deploy Collection')]/following-sibling::form");
+        SelenideElement container = $x("//b[contains(text(), 'Deploy Collection')]/following-sibling::form")
+                .shouldBe(Condition.visible);
         collectionNameInput = container.$x(".//input[@placeholder = 'Enter collection name']");
         collectionSymbolInput = container.$x(".//input[@placeholder = 'Enter collection symbol']");
         collectionTokenUriInput = container.$x(".//input[@placeholder = 'Enter collection token URI']");
