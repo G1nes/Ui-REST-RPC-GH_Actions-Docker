@@ -1,17 +1,21 @@
 package com.example;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.*;
 import com.example.api.configuration.ApiTestsConfiguration;
 import com.example.api.configuration.RestAssuredConfiguration;
 import com.example.ui.configuration.*;
 import com.example.ui.metamask.MetamaskFlow;
 import com.example.ui.metamask.NetworkConnectionData;
+import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.logging.LogType;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.$x;
+
+@Slf4j
 public abstract class BaseTest {
 
     protected final TestDataGenerator generator = new TestDataGenerator();
@@ -47,7 +51,13 @@ public abstract class BaseTest {
         metamaskFlow.addNewNetwork(networkData);
 
         Selenide.switchTo().window(APP_CONFIGURATION.appName());
-        //Selenide.refresh();
+        Selenide.refresh();
+
+        SelenideElement clickHereBtn = $x("//a[contains(text(), 'Click here')]");
+        if (clickHereBtn.isDisplayed()) {
+            clickHereBtn.click();
+        }
+        Selenide.webdriver().object().manage().logs().get(LogType.BROWSER).getAll().stream().forEach(consoleLog -> log.info(consoleLog.toString()));
     }
 
     @AfterEach
