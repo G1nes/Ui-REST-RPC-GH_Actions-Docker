@@ -44,6 +44,7 @@ jobs:
         PASSWORD: ${{ secrets.PASSWORD }}
         WALLET_ADDRESS: ${{ secrets.WALLET_ADDRESS }}
       run: ./gradlew test --info --stacktrace
+    - run: echo ${{ github.workspace }}/build/reports/tests/
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
