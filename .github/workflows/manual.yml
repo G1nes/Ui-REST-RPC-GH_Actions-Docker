@@ -49,4 +49,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: report
-        path: ${{ github.workspace }}/build/reports/tests/
+        path: /home/runner/work/test-framework-example-3/test-framework-example-3/build/reports/tests/
