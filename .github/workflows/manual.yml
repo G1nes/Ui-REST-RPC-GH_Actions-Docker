@@ -24,10 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Build Applications
-      run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
+    - run: ls ${{ github.workspace }}
+    - run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
   
   run_tests:
     runs-on: ubuntu-latest
     steps:
     - name: Run tests
-      run: ./gradlew test
+    - run: ls ${{ github.workspace }}
+    - run: ./gradlew test
