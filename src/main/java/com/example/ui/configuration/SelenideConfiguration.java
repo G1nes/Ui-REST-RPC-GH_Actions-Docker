@@ -2,12 +2,8 @@ package com.example.ui.configuration;
 
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
-import java.util.logging.Level;
 
 public class SelenideConfiguration {
 
