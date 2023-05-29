@@ -46,8 +46,8 @@ public abstract class BaseTest {
         metamaskFlow.login();
         metamaskFlow.addNewNetwork(networkData);
 
-        Selenide.switchTo().window(APP_CONFIGURATION.appName());
-        Selenide.refresh();
+        //Selenide.switchTo().window(APP_CONFIGURATION.appName());
+        //Selenide.refresh();
     }
 
     @AfterEach
