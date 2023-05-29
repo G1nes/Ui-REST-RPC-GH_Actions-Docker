@@ -1,0 +1,26 @@
+name: Manual workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      fe_image:
+        default: 'evercoinx/faraway:nft-collection-deployer-frontend'
+        required: true
+        type: string
+      be_image:
+        default: 'evercoinx/faraway:nft-collection-deployer-backend'
+        required: true
+        type: string
+
+jobs:
+  build_applications:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Applications
+      run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
+  
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run tests
+      run: ./gradlew test
