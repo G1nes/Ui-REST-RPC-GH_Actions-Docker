@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+
+  faraway-backend:
+    image: evercoinx/faraway:nft-collection-deployer-backend
+    ports:
+      - 4000:4000
+    restart: on-failure:5
+
+  faraway-front-end:
+    image: evercoinx/faraway:nft-collection-deployer-frontend
+    ports:
+      - 3000:3000
+    restart: on-failure:5
