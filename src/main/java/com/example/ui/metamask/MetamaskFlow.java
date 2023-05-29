@@ -87,10 +87,11 @@ public class MetamaskFlow {
     }
 
     public void authorize() {
-        Selenide.webdriver().object().getWindowHandles().forEach(log::info);
-        Selenide.switchTo()
-                .window(appConfiguration.extensionNotification(),
-                        Duration.ofMillis(Configuration.pageLoadTimeout));
+        //Selenide.webdriver().object().getWindowHandles().forEach(log::info);
+        //Selenide.switchTo()
+        //        .window(appConfiguration.extensionNotification(),
+        //                Duration.ofMillis(Configuration.pageLoadTimeout));
+        Selenide.open("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/popup.html");
         $x("//input[@data-testid='unlock-password']").sendKeys(PASSWORD);
         $x("//button[@data-testid='unlock-submit']").click();
         Selenide.switchTo().window(appConfiguration.appName());
