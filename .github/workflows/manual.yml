@@ -28,4 +28,4 @@ jobs:
     - name: Build Applications
       run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
     - name: Run tests
-      run: ./gradlew test --info
+      run: ./gradlew test --info --stacktrace
