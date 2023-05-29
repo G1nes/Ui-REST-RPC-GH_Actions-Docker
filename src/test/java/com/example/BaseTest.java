@@ -46,8 +46,6 @@ public abstract class BaseTest {
     public void setUpApplication() {
         Selenide.open(Configuration.baseUrl);
         metamaskFlow.authorize();
-        Selenide.switchTo().window(APP_CONFIGURATION.extensionNotification());
-
 
         //metamaskFlow.switchToMetamaskExtensionTab();
         //metamaskFlow.restoreWalletAccess();
