@@ -87,6 +87,7 @@ public class MetamaskFlow {
     }
 
     public void authorize() {
+        Selenide.webdriver().object().getWindowHandles().forEach(log::info);
         Selenide.switchTo()
                 .window(appConfiguration.extensionNotification(),
                         Duration.ofMillis(Configuration.pageLoadTimeout));
