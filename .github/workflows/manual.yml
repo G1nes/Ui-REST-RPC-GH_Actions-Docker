@@ -28,4 +28,19 @@ jobs:
     - name: Build Applications
       run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
     - name: Run tests
+      env: 
+        FIRST_S: ${{ secrets.FIRST_S }}
+        SECOND_S: ${{ secrets.SECOND_S }}
+        THIRD_S: ${{ secrets.THIRD_S }}
+        FOURTH_S: ${{ secrets.FOURTH_S }}
+        FIFTH_S: ${{ secrets.FIFTH_S }}
+        SIXTH_S: ${{ secrets.SIXTH_S }}
+        SEVENTH_S: ${{ secrets.SEVENTH_S }}
+        EIGHT_S: ${{ secrets.EIGHT_S }}
+        NINTH_S: ${{ secrets.NINTH_S }}
+        TENTH_S: ${{ secrets.TENTH_S }}
+        ELEVENTH_S: ${{ secrets.ELEVENTH_S }}
+        TWELFTH_S: ${{ secrets.TWELFTH_S }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        WALLET_ADDRESS: ${{ secrets.WALLET_ADDRESS }}
       run: ./gradlew test --info --stacktrace
