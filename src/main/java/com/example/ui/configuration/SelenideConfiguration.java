@@ -1,0 +1,25 @@
+package com.example.ui.configuration;
+
+import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.io.File;
+
+public class SelenideConfiguration {
+
+    private final UiTestsConfiguration configuration;
+
+    public SelenideConfiguration(UiTestsConfiguration uiTestsConfiguration) {
+        configuration = uiTestsConfiguration;
+    }
+
+    public void configure() {
+        Configuration.baseUrl = configuration.browserUrl();
+        Configuration.browserSize = configuration.browserResolution();
+        Configuration.timeout = Long.parseLong(configuration.browserElementTimeoutMillis());
+        Configuration.pageLoadTimeout = Long.parseLong(configuration.browserPageTimeoutMillis());
+        ChromeOptions chromeOptions = new ChromeOptions()
+                .addExtensions(new File("src/main/resources/10.30.4_0.crx"));
+        Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+    }
+}
