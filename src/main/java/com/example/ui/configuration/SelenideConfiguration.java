@@ -22,6 +22,7 @@ public class SelenideConfiguration {
                 .addExtensions(new File("src/main/resources/10.30.4_0.crx"))
                 .addArguments("--no-sandbox")
                 .addArguments("--headless=new")
+                .addArguments("--disable-gpu")
                 .addArguments("--disable-dev-shm-usage");
 
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
