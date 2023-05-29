@@ -48,10 +48,10 @@ public class MetamaskFlow {
                 .click();
         $x("//button[contains(@data-testid, 'pin-extension-next')]").click();
         $x("//button[contains(@data-testid, 'pin-extension-done')]").click();
-        $x("//button[@class='button btn--rounded btn-primary']")
-                .shouldBe(Condition.visible)
-                .click();
-        $x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
+        //$x("//button[@class='button btn--rounded btn-primary']")
+        //        .shouldBe(Condition.visible)
+        //        .click();
+        //$x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
         $x("//button[contains(@data-testid, 'popover-close')]").click();
     }
 
