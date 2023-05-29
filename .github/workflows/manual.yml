@@ -16,6 +16,9 @@ jobs:
   run_tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest
+    - run: chrome --version
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: Build Applications
