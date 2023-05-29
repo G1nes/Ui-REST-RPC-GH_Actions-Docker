@@ -19,6 +19,6 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: Build Applications
-    - run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
+      run: FE_IMAGE=${{ inputs.fe_image }} BE_IMAGE=${{ inputs.be_image }} docker-compose up -d
     - name: Run tests
-    - run: ./gradlew test
+      run: ./gradlew test
