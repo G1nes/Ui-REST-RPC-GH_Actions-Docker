@@ -43,7 +43,7 @@ jobs:
         TWELFTH_S: ${{ secrets.TWELFTH_S }}
         PASSWORD: ${{ secrets.PASSWORD }}
         WALLET_ADDRESS: ${{ secrets.WALLET_ADDRESS }}
-      run: ./gradlew test --stacktrace
+      run: ./gradlew test --stacktrace --info
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       if: always()
