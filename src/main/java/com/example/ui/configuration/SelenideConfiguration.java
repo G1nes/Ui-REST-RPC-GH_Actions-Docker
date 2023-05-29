@@ -18,22 +18,17 @@ public class SelenideConfiguration {
     }
 
     public void configure() {
-        LoggingPreferences loggingPreferences = new LoggingPreferences();
-        loggingPreferences.enable(LogType.BROWSER, Level.INFO);
-        loggingPreferences.enable(LogType.DRIVER, Level.INFO);
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("loggingPrefs", loggingPreferences);
         ChromeOptions chromeOptions = new ChromeOptions()
                 .addExtensions(new File("src/main/resources/10.30.4_0.crx"))
                 .addArguments("--no-sandbox")
-                .addArguments("--disable-dev-shm-usage")
-                .addArguments("--headless");
-        chromeOptions.setCapability(ChromeOptions.CAPABILITY, desiredCapabilities);
+                .addArguments("--headless=new")
+                .addArguments("--disable-dev-shm-usage");
 
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         Configuration.baseUrl = configuration.browserUrl();
         Configuration.browserSize = configuration.browserResolution();
         Configuration.timeout = Long.parseLong(configuration.browserElementTimeoutMillis());
         Configuration.pageLoadTimeout = Long.parseLong(configuration.browserPageTimeoutMillis());
+        Configuration.webdriverLogsEnabled = true;
     }
 }
