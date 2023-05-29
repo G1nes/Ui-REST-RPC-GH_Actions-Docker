@@ -1,8 +1,9 @@
 package com.example.ui.elements;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import com.example.ui.data.CreateCollectionFormDto;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -22,7 +23,7 @@ public class CreateCollectionForm {
     }
 
     public CreateCollectionForm fillFormWithFormData(CreateCollectionFormDto data) {
-        collectionNameInput.shouldBe(Condition.visible)
+        collectionNameInput.shouldBe(Condition.visible, Duration.ofMillis(Configuration.timeout))
                 .setValue(data.getCollectionName());
         collectionSymbolInput.setValue(data.getCollectionSymbol());
         collectionTokenUriInput.setValue(data.getCollectionTokenUri());

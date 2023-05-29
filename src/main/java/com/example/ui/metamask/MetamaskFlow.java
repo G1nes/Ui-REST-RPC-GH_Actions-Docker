@@ -2,6 +2,7 @@ package com.example.ui.metamask;
 
 import com.codeborne.selenide.*;
 import com.example.ui.configuration.AppConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 
@@ -10,6 +11,7 @@ import java.util.*;
 
 import static com.codeborne.selenide.Selenide.*;
 
+@Slf4j
 public class MetamaskFlow {
 
     private final AppConfiguration appConfiguration = ConfigFactory.create(AppConfiguration.class, Map.of());
@@ -48,22 +50,27 @@ public class MetamaskFlow {
                 .click();
         $x("//button[contains(@data-testid, 'pin-extension-next')]").click();
         $x("//button[contains(@data-testid, 'pin-extension-done')]").click();
-        //$x("//button[@class='button btn--rounded btn-primary']")
-        //        .shouldBe(Condition.visible)
-        //        .click();
-        //$x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
+        log.info("Choosing wallet");
+        SelenideElement connectToNetworkNextBtn = $x("//button[@class='button btn--rounded btn-primary']");
+        if (connectToNetworkNextBtn.isDisplayed()) {
+            connectToNetworkNextBtn.click();
+            $x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
+        }
         $x("//button[contains(@data-testid, 'popover-close')]").click();
     }
 
     public void addNewNetwork(NetworkConnectionData data) {
+        log.info("Adding network " + data.getNetworkName());
         Selenide.open(appConfiguration.extensionAddNetworkAddress());
         ElementsCollection inputs = $$x("//input[@class='form-field__input']");
         inputs.get(0).sendKeys(data.getNetworkName());
         inputs.get(1).sendKeys(data.getRpcUrl());
         inputs.get(2).sendKeys(data.getChainId());
         inputs.get(3).sendKeys(data.getCurrencySymbol());
-        $x("//button[@class='button btn--rounded btn-primary']").shouldBe(Condition.interactable)
+        $x("//button[@class='button btn--rounded btn-primary']")
+                .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
+        log.info("Network was successfully added");
     }
 
     public void approveTransaction() {
