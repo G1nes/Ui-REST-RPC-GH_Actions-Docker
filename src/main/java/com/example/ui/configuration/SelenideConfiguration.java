@@ -30,5 +30,6 @@ public class SelenideConfiguration {
         Configuration.timeout = Long.parseLong(configuration.browserElementTimeoutMillis());
         Configuration.pageLoadTimeout = Long.parseLong(configuration.browserPageTimeoutMillis());
         Configuration.webdriverLogsEnabled = true;
+        Configuration.headless = true;
     }
 }
