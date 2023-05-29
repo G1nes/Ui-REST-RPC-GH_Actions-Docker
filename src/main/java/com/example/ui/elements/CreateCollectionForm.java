@@ -24,7 +24,7 @@ public class CreateCollectionForm {
     }
 
     public CreateCollectionForm fillFormWithFormData(CreateCollectionFormDto data) {
-        container.shouldBe(Condition.visible, Duration.ofMillis(Configuration.timeout));
+        container.shouldBe(Condition.visible, Duration.ofMillis(Configuration.pageLoadTimeout));
         collectionNameInput.setValue(data.getCollectionName());
         collectionSymbolInput.setValue(data.getCollectionSymbol());
         collectionTokenUriInput.setValue(data.getCollectionTokenUri());
