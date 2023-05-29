@@ -70,6 +70,9 @@ public class MetamaskFlow {
         $x("//button[@class='button btn--rounded btn-primary']")
                 .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
+        $x("//button[contains(@class, 'home__new-network-added__switch-to-button')]")
+                .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
+                .click();
         log.info("Network was successfully added");
     }
 
