@@ -19,7 +19,10 @@ public class SelenideConfiguration {
         Configuration.timeout = Long.parseLong(configuration.browserElementTimeoutMillis());
         Configuration.pageLoadTimeout = Long.parseLong(configuration.browserPageTimeoutMillis());
         ChromeOptions chromeOptions = new ChromeOptions()
-                .addExtensions(new File("src/main/resources/10.30.4_0.crx"));
+                .addExtensions(new File("src/main/resources/10.30.4_0.crx"))
+                .addArguments("--no-sandbox")
+                .addArguments("--disable-dev-shm-usage")
+                .addArguments("--headless");
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
     }
 }
