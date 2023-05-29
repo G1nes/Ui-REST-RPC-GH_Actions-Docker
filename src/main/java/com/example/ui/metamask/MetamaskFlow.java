@@ -33,7 +33,7 @@ public class MetamaskFlow {
         switchTo().window(appConfiguration.extensionName());
     }
 
-    public void login() {
+    public void restoreWalletAccess() {
         $(By.id("onboarding__terms-checkbox")).click();
         $x("//button[contains(@data-testid, 'onboarding-import-wallet')]").click();
         $x("//button[contains(@data-testid, 'metametrics-no-thanks')]").click();
@@ -84,5 +84,15 @@ public class MetamaskFlow {
                 .shouldBe(Condition.interactable)
                 .click();
         Selenide.switchTo().window(appConfiguration.appName());
+    }
+
+    public void authorize() {
+        Selenide.switchTo()
+                .window(appConfiguration.extensionNotification(),
+                        Duration.ofMillis(Configuration.pageLoadTimeout));
+        $x("//input[@data-testid='unlock-password']").sendKeys(PASSWORD);
+        $x("//button[@data-testid='unlock-submit']").click();
+        Selenide.switchTo().window(appConfiguration.appName());
+        Selenide.refresh();
     }
 }
