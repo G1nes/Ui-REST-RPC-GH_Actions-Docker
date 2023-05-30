@@ -59,6 +59,8 @@ public class MetamaskFlow {
             connectToNetworkNextBtn.click();
             $x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
             log.info("App is connected to MetaMask");
+        } else {
+            log.warn("App is not connected to MetaMask");
         }
         $x("//button[contains(@data-testid, 'popover-close')]").click();
     }
