@@ -2,6 +2,7 @@ package com.example.ui.metamask;
 
 import com.codeborne.selenide.*;
 import com.example.api.clients.rpc.JsonRpcClient;
+import com.example.api.clients.rpc.JsonRpsResponseDto;
 import com.example.ui.configuration.AppConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
@@ -80,7 +81,10 @@ public class MetamaskFlow {
                 .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
         log.info("Network was successfully added");
-        log.info("Current chainId = " + jsonRpcClient.getChainId().getResult());
+        JsonRpsResponseDto response = jsonRpcClient.getChainId();
+        if (response.getResult() != null) {
+            log.info("Current chainId = " + response.getResult());
+        }
     }
 
     public void approveTransaction() {
