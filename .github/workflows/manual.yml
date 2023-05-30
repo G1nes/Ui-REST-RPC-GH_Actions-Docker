@@ -21,7 +21,9 @@ jobs:
       with:
         java-version: 1.11
     - name: Install Chrome
-      uses: browser-actions/setup-chrome@110
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: 110.0.5481.177
     - run: chrome --version
     - name: Check out repository code
       uses: actions/checkout@v3
