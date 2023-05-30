@@ -11,7 +11,7 @@ public class JsonRpcClient extends BaseClient {
 
     private static final RpcConfiguration RPC_CONFIGURATION = ConfigFactory.create(RpcConfiguration.class, Map.of());
     private static final String TOKEN = System.getenv("RPC_TOKEN");
-    private static final String URL = RPC_CONFIGURATION + TOKEN;
+    private static final String URL = RPC_CONFIGURATION.rpcUrl() + TOKEN;
 
     public JsonRpsResponseDto getChainId(){
         JsonRpcRequestBodyDto requestBody = JsonRpcRequestBodyDto.builder()
