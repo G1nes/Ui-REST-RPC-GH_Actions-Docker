@@ -52,11 +52,13 @@ public class MetamaskFlow {
                 .click();
         $x("//button[contains(@data-testid, 'pin-extension-next')]").click();
         $x("//button[contains(@data-testid, 'pin-extension-done')]").click();
-        log.info("Choosing wallet");
+
         SelenideElement connectToNetworkNextBtn = $x("//button[@class='button btn--rounded btn-primary']");
         if (connectToNetworkNextBtn.isDisplayed()) {
+            log.info("App is trying to connect to MetaMask");
             connectToNetworkNextBtn.click();
             $x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
+            log.info("App is connected to MetaMask");
         }
         $x("//button[contains(@data-testid, 'popover-close')]").click();
     }
@@ -76,7 +78,7 @@ public class MetamaskFlow {
                 .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
         log.info("Network was successfully added");
-        log.info("Current chainId = " + jsonRpcClient.getChainId());
+        log.info("Current chainId = " + jsonRpcClient.getChainId().getResult());
     }
 
     public void approveTransaction() {

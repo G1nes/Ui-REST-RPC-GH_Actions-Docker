@@ -1,6 +1,7 @@
 package com.example;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.example.api.configuration.ApiTestsConfiguration;
 import com.example.api.configuration.RestAssuredConfiguration;
 import com.example.ui.configuration.*;
@@ -9,11 +10,8 @@ import com.example.ui.metamask.NetworkConnectionData;
 import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.logging.LogType;
 
 import java.util.Map;
-
-import static com.codeborne.selenide.Selenide.$x;
 
 @Slf4j
 public abstract class BaseTest {
@@ -51,12 +49,6 @@ public abstract class BaseTest {
 
         Selenide.switchTo().window(APP_CONFIGURATION.appName());
         Selenide.refresh();
-
-        SelenideElement clickHereBtn = $x("//a[contains(text(), 'Click here')]");
-        if (clickHereBtn.isDisplayed()) {
-            clickHereBtn.click();
-        }
-        Selenide.webdriver().object().manage().logs().get(LogType.BROWSER).getAll().forEach(consoleLog -> log.info(consoleLog.toString()));
     }
 
     @AfterEach
