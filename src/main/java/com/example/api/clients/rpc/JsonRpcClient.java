@@ -16,7 +16,7 @@ public class JsonRpcClient extends BaseClient {
     public JsonRpsResponseDto getChainId(){
         JsonRpcRequestBodyDto requestBody = JsonRpcRequestBodyDto.builder()
                 .id(1)
-                .jsonrpc(JsonRpcVersionType.SECOND.getVersion())
+                .jsonRpc(JsonRpcVersionType.SECOND.getVersion())
                 .params(new String[0])
                 .method("eth_chainId")
                 .build();
