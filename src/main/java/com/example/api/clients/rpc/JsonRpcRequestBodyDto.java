@@ -1,5 +1,6 @@
 package com.example.api.clients.rpc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,5 +10,6 @@ public class JsonRpcRequestBodyDto {
     private String method;
     private String[] params;
     private Integer id;
-    private String jsonrpc;
+    @JsonProperty("jsonrpc")
+    private String jsonRpc;
 }
