@@ -7,7 +7,7 @@ public interface AppConfiguration extends Config {
     @Config.Key("extension.name")
     String extensionName();
 
-    @Config.Key("extension.add_network.address")
+    @Config.Key("extension.add_network.url")
     String extensionAddNetworkAddress();
 
     @Config.Key("extension.notification")
