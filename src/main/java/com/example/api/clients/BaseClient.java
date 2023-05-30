@@ -1,6 +1,7 @@
 package com.example.api.clients;
 
 import com.example.api.configuration.ApiTestsConfiguration;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.aeonbits.owner.ConfigFactory;
 import org.awaitility.Awaitility;
@@ -26,6 +27,17 @@ public abstract class BaseClient {
     protected <T> T get(String endpoint, Class<T> responseClass) {
         return createDefaultSpec()
                 .get(endpoint)
+                .as(responseClass);
+    }
+
+    protected <T> T post(String endpoint,
+                         Object body,
+                         ContentType contentType,
+                         Class<T> responseClass) {
+        return given()
+                .contentType(contentType)
+                .body(body)
+                .post(endpoint)
                 .as(responseClass);
     }
 

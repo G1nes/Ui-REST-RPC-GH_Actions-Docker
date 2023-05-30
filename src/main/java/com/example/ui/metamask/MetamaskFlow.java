@@ -1,6 +1,7 @@
 package com.example.ui.metamask;
 
 import com.codeborne.selenide.*;
+import com.example.api.clients.rpc.JsonRpcClient;
 import com.example.ui.configuration.AppConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
@@ -15,6 +16,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class MetamaskFlow {
 
     private final AppConfiguration appConfiguration = ConfigFactory.create(AppConfiguration.class, Map.of());
+    private final JsonRpcClient jsonRpcClient = new JsonRpcClient();
     private final static String PASSWORD = System.getenv("PASSWORD");
     private final static List<String> SECRETS = Arrays.asList(System.getenv("FIRST_S"),
                                                               System.getenv("SECOND_S"),
@@ -33,7 +35,7 @@ public class MetamaskFlow {
         switchTo().window(appConfiguration.extensionName());
     }
 
-    public void login() {
+    public void restoreWalletAccess() {
         $(By.id("onboarding__terms-checkbox")).click();
         $x("//button[contains(@data-testid, 'onboarding-import-wallet')]").click();
         $x("//button[contains(@data-testid, 'metametrics-no-thanks')]").click();
@@ -50,11 +52,15 @@ public class MetamaskFlow {
                 .click();
         $x("//button[contains(@data-testid, 'pin-extension-next')]").click();
         $x("//button[contains(@data-testid, 'pin-extension-done')]").click();
-        log.info("Choosing wallet");
+
         SelenideElement connectToNetworkNextBtn = $x("//button[@class='button btn--rounded btn-primary']");
         if (connectToNetworkNextBtn.isDisplayed()) {
+            log.info("App is trying to connect to MetaMask");
             connectToNetworkNextBtn.click();
             $x("//button[contains(@data-testid, 'page-container-footer-next')]").click();
+            log.info("App is connected to MetaMask");
+        } else {
+            log.warn("App is not connected to MetaMask");
         }
         $x("//button[contains(@data-testid, 'popover-close')]").click();
     }
@@ -70,7 +76,11 @@ public class MetamaskFlow {
         $x("//button[@class='button btn--rounded btn-primary']")
                 .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
+        $x("//button[contains(@class, 'home__new-network-added__switch-to-button')]")
+                .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
+                .click();
         log.info("Network was successfully added");
+        log.info("Current chainId = " + jsonRpcClient.getChainId().getResult());
     }
 
     public void approveTransaction() {

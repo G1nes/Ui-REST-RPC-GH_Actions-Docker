@@ -7,11 +7,13 @@ import com.example.api.configuration.RestAssuredConfiguration;
 import com.example.ui.configuration.*;
 import com.example.ui.metamask.MetamaskFlow;
 import com.example.ui.metamask.NetworkConnectionData;
+import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 
 import java.util.Map;
 
+@Slf4j
 public abstract class BaseTest {
 
     protected final TestDataGenerator generator = new TestDataGenerator();
@@ -41,9 +43,8 @@ public abstract class BaseTest {
     @BeforeEach
     public void setUpApplication() {
         Selenide.open(Configuration.baseUrl);
-
         metamaskFlow.switchToMetamaskExtensionTab();
-        metamaskFlow.login();
+        metamaskFlow.restoreWalletAccess();
         metamaskFlow.addNewNetwork(networkData);
 
         Selenide.switchTo().window(APP_CONFIGURATION.appName());
