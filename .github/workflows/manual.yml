@@ -21,7 +21,10 @@ jobs:
       with:
         java-version: 1.11
     - name: Install Chrome
-      uses: browser-actions/setup-chrome@latest
+      run: |
+        VERSION_STRING="110.0.5481.177"
+        wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${VERSION_STRING}_amd64.deb"
+        sudo dpkg -i "google-chrome-stable_${VERSION_STRING}_amd64.deb"
     - run: chrome --version
     - name: Check out repository code
       uses: actions/checkout@v3
