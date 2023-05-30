@@ -1,6 +1,7 @@
 package com.example.ui.metamask;
 
 import com.codeborne.selenide.*;
+import com.example.api.clients.rpc.JsonRpcClient;
 import com.example.ui.configuration.AppConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
@@ -15,6 +16,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class MetamaskFlow {
 
     private final AppConfiguration appConfiguration = ConfigFactory.create(AppConfiguration.class, Map.of());
+    private final JsonRpcClient jsonRpcClient = new JsonRpcClient();
     private final static String PASSWORD = System.getenv("PASSWORD");
     private final static List<String> SECRETS = Arrays.asList(System.getenv("FIRST_S"),
                                                               System.getenv("SECOND_S"),
@@ -74,6 +76,7 @@ public class MetamaskFlow {
                 .shouldBe(Condition.interactable, Duration.ofMillis(Configuration.timeout))
                 .click();
         log.info("Network was successfully added");
+        log.info("Current chainId = " + jsonRpcClient.getChainId());
     }
 
     public void approveTransaction() {
@@ -84,17 +87,5 @@ public class MetamaskFlow {
                 .shouldBe(Condition.interactable)
                 .click();
         Selenide.switchTo().window(appConfiguration.appName());
-    }
-
-    public void authorize() {
-        //Selenide.webdriver().object().getWindowHandles().forEach(log::info);
-        Selenide.switchTo()
-                .window(appConfiguration.extensionNotification(),
-                        Duration.ofMillis(Configuration.pageLoadTimeout));
-        //Selenide.open("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/notification.html");
-        $x("//input[@data-testid='unlock-password']").sendKeys(PASSWORD);
-        $x("//button[@data-testid='unlock-submit']").click();
-        Selenide.switchTo().window(appConfiguration.appName());
-        Selenide.refresh();
     }
 }

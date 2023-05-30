@@ -45,20 +45,18 @@ public abstract class BaseTest {
     @BeforeEach
     public void setUpApplication() {
         Selenide.open(Configuration.baseUrl);
-        metamaskFlow.authorize();
+        metamaskFlow.switchToMetamaskExtensionTab();
+        metamaskFlow.restoreWalletAccess();
+        metamaskFlow.addNewNetwork(networkData);
 
-        //metamaskFlow.switchToMetamaskExtensionTab();
-        //metamaskFlow.restoreWalletAccess();
-        //metamaskFlow.addNewNetwork(networkData);
-        //
-        //Selenide.switchTo().window(APP_CONFIGURATION.appName());
-        //Selenide.refresh();
-        //
-        //SelenideElement clickHereBtn = $x("//a[contains(text(), 'Click here')]");
-        //if (clickHereBtn.isDisplayed()) {
-        //    clickHereBtn.click();
-        //}
-        //Selenide.webdriver().object().manage().logs().get(LogType.BROWSER).getAll().stream().forEach(consoleLog -> log.info(consoleLog.toString()));
+        Selenide.switchTo().window(APP_CONFIGURATION.appName());
+        Selenide.refresh();
+
+        SelenideElement clickHereBtn = $x("//a[contains(text(), 'Click here')]");
+        if (clickHereBtn.isDisplayed()) {
+            clickHereBtn.click();
+        }
+        Selenide.webdriver().object().manage().logs().get(LogType.BROWSER).getAll().forEach(consoleLog -> log.info(consoleLog.toString()));
     }
 
     @AfterEach

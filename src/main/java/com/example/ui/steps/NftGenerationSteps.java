@@ -40,6 +40,7 @@ public class NftGenerationSteps {
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("There is no event with name: " + expectedResult.getName()));
         assertThat(actualEvent).usingComparator(getCollectionCreationEventComparator()).isEqualTo(expectedResult);
+        assertThat(actualEvent.getAddress()).isNotEmpty();
     }
 
     public void verifyNftIsCreated(CreateNftFormDto data) {
